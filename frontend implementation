@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>Upload File or Text</h1>
+    <form id="fileUploadForm">
+        <input type="file" id="fileInput" />
+        <button type="submit">Upload File</button>
+    </form>
+    <form id="textUploadForm">
+        <textarea id="textInput"></textarea>
+        <button type="submit">Upload Text</button>
+    </form>
+    <script>
+        document.getElementById('fileUploadForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            await fetch('/api/upload/file', {
+                method: 'POST',
+                body: formData
+            });
+            alert('File uploaded successfully');
+        };
+
+        document.getElementById('textUploadForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const textInput = document.getElementById('textInput').value;
+            await fetch('/api/upload/text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: textInput })
+            });
+            alert('Text uploaded successfully');
+        };
+    </script>
+</body>
+</html>
