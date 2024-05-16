@@ -1,0 +1,18 @@
+@RestController
+@RequestMapping("/api/upload")
+public class FileUploadController {
+
+    @PostMapping("/file")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        // Process the file, convert to chunks, generate embeddings
+        // Save embeddings to vector DB
+        return ResponseEntity.ok("File uploaded and processed successfully.");
+    }
+
+    @PostMapping("/text")
+    public ResponseEntity<String> uploadText(@RequestBody String text) {
+        // Process the text, convert to chunks, generate embeddings
+        // Save embeddings to vector DB
+        return ResponseEntity.ok("Text uploaded and processed successfully.");
+    }
+}
